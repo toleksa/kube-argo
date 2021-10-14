@@ -11,7 +11,7 @@ spec:
   source:
     repoURL: 'https://charts.longhorn.io'
     targetRevision: '1.2.2'
-    chart: kube-prometheus-stack
+    chart: longhorn
 #    repoURL: 'https://github.com/longhorn/longhorn/'
 #    targetRevision: HEAD
 #    path: deploy
