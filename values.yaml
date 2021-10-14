@@ -1,0 +1,7 @@
+env: dev
+domain: "{{ .Values.env}}.kube.ac"
+
+longhorn:
+  defaultClassReplicaCount: 1
+  ingress:
+    enabled: true

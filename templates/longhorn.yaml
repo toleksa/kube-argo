@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: longhorn
+  namespace: argocd
+spec:
+  destination:
+    namespace: longhorn-system
+    server: 'https://kubernetes.default.svc'
+  project: default
+  source:
+    repoURL: 'https://charts.longhorn.io'
+    targetRevision: 'x'
+    chart: kube-prometheus-stack
+#    repoURL: 'https://github.com/longhorn/longhorn/'
+#    targetRevision: HEAD
+#    path: deploy
+    helm:
+      values: |
+        persistence:
+          defaultClassReplicaCount: {{ .Values.longhorn.defaultClassReplicaCount}}
+        ingress:
+          enabled: {{ .Values.longhorn.ingress.enabled}}
+          host: "longhorn.{{ .Values.domain}}"
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - PruneLast=true
