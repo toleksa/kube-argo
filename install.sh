@@ -5,7 +5,7 @@ if [ ! -f ./env ]; then
   exit 1
 fi
 
-. env
+. ./env
 
 envsubst < kube-argo.yaml | kubectl apply -f -
 

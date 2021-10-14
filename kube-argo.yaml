@@ -14,8 +14,8 @@ spec:
     path: .
     helm:
       values: |
-        env: ${KUBERNETES_ENV}
-        domain: ${KUBERNETES_DOMAIN}
+        env: $KUBERNETES_ENV
+        domain: $KUBERNETES_DOMAIN
   syncPolicy:
     automated:
       prune: true
