@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kube-argo
+  namespace: argocd
+spec:
+  destination:
+    namespace: kube-argo
+    server: 'https://kubernetes.default.svc'
+  project: default
+  source:
+    repoURL: 'https://github.com/toleksa/kube-argo'
+    targetRevision: HEAD
+    path: /
+    helm:
+      values: |
+        env: test
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - PruneLast=true
