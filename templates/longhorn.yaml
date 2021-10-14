@@ -10,7 +10,7 @@ spec:
   project: default
   source:
     repoURL: 'https://charts.longhorn.io'
-    targetRevision: '1.2.0'
+    targetRevision: '1.2.2'
     chart: kube-prometheus-stack
 #    repoURL: 'https://github.com/longhorn/longhorn/'
 #    targetRevision: HEAD
