@@ -1,5 +1,5 @@
 env: dev
-domain: "{{ .Values.env}}.kube.ac"
+domain: example.com
 
 longhorn:
   defaultClassReplicaCount: 1

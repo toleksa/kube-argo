@@ -19,9 +19,14 @@ spec:
       values: |
         persistence:
           defaultClassReplicaCount: {{ .Values.longhorn.defaultClassReplicaCount}}
+        {{- if .Values.longhorn.ingress.enabled }}
         ingress:
-          enabled: {{ .Values.longhorn.ingress.enabled}}
+          enabled: true
+          {{- if .Values.env }}
+          host: "longhorn.{{ .Values.env}}.{{ .Values.domain}}"
+          {{- else -}}
           host: "longhorn.{{ .Values.domain}}"
+        {{- end }}
   syncPolicy:
     automated:
       prune: true
