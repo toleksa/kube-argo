@@ -26,6 +26,7 @@ spec:
           host: "longhorn.{{ .Values.env}}.{{ .Values.domain}}"
           {{- else -}}
           host: "longhorn.{{ .Values.domain}}"
+          {{- end }}
         {{- end }}
   syncPolicy:
     automated:
