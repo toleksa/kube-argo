@@ -22,7 +22,7 @@ spec:
         {{- if .Values.longhorn.ingress.enabled }}
         ingress:
           enabled: true
-          {{- if .Values.env }}
+          {{- if ne .Values.env "null" }}
           host: "longhorn.{{ .Values.env}}.{{ .Values.domain}}"
           {{- else -}}
           host: "longhorn.{{ .Values.domain}}"
