@@ -18,10 +18,10 @@ spec:
           - ingress
         provider: rfc2136
         rfc2136:
-          host: {{ .Values.external-dns.rfc2136.host }}
+          host: {{ .Values.externaldns.rfc2136.host }}
           port: 53
-          zone: {{ .Values.external-dns.rfc2136.zone }}
-          tsigSecret: {{ .Values.external-dns.rfc2136.tsigSecret }}
+          zone: {{ .Values.externaldns.rfc2136.zone }}
+          tsigSecret: {{ .Values.externaldns.rfc2136.tsigSecret }}
           tsigSecretAlg: hmac-sha256
           tsigKeyname: externaldns-key
           tsigAxfr: true

@@ -5,7 +5,7 @@ longhorn:
   ingress:
     enabled: true
 
-external-dns:
+externaldns:
   rfc2136:
     host: 127.0.0.1
     zone: example.com
