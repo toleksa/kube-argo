@@ -1,7 +1,12 @@
-env: dev
 domain: example.com
 
 longhorn:
   defaultClassReplicaCount: 1
   ingress:
     enabled: true
+
+external-dns:
+  rfc2136:
+    host: 127.0.0.1
+    zone: example.com
+    tsigSecret: ""

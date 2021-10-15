@@ -15,6 +15,11 @@ spec:
     helm:
       values: |
         domain: $KUBERNETES_DOMAIN
+        external-dns:
+          rfc2136:
+            host: $EXTERNAL_DNS_RFC2136_HOST
+            zone: $EXTERNAL_DNS_RFC2136_ZONE
+            tsigSecret: $EXTERNAL_DNS_RFC2136_TSIGSECRET 
   syncPolicy:
     automated:
       prune: true
