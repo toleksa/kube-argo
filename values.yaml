@@ -23,9 +23,6 @@ argocd:
       enabled: true
       hosts:
       - argocd.example.com
-      https: false
-    extraArgs:
-      - --insecure
     config:
       repositories: |
         - type: helm
