@@ -11,9 +11,9 @@ spec:
     namespace: argocd
   project: default
   source:
-    path: charts/argo-cd
-    repoURL: https://github.com/toleksa/kube-argo.git
-    targetRevision: HEAD
+    repoURL: https://argoproj.github.io/argo-helm
+    targetRevision: '2.1.3'
+    chart: argo-cd
     helm:
       values: |
         server:
