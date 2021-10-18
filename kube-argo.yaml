@@ -20,12 +20,6 @@ spec:
             host: $EXTERNAL_DNS_RFC2136_HOST
             zone: $EXTERNAL_DNS_RFC2136_ZONE
             tsigSecret: $EXTERNAL_DNS_RFC2136_TSIGSECRET 
-        argocd:
-          server:
-            ingress:
-              enabled: true
-              hosts:
-              - argocd.$KUBERNETES_DOMAIN
   syncPolicy:
     automated:
       prune: true
