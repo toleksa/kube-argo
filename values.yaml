@@ -21,6 +21,7 @@ argocd:
   server:
     ingress:
       enabled: true
+      https: true
       hosts:
       - argocd.example.com
     config:
