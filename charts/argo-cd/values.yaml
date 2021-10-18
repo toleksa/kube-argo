@@ -6,6 +6,10 @@ argo-cd:
   dex:
     enabled: false
   server:
+    ingress:
+      enabled: true
+      hosts: 
+      - argocd.u5.kube.ac
     extraArgs:
       - --insecure
     config:
