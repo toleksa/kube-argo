@@ -22,5 +22,5 @@ kubectl -n argocd patch secret argocd-secret \
 envsubst < kube-argo.yaml | kubectl apply -f -
 
 # remove argocd entry from helm, now it's selfmanaged
-kubectl delete secret -l owner=helm,name=argocd
+kubectl delete secret -l owner=helm,name=argocd -n argocd
 
