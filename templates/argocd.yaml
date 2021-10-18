@@ -22,6 +22,9 @@ spec:
             https: true
             hosts:
             - "argocd.{{ .Values.domain }}"
+            tls:
+              hosts:
+              - "argocd.{{ .Values.domain }}"
   syncPolicy:
     automated:
       prune: true
