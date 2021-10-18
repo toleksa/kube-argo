@@ -17,14 +17,13 @@ spec:
     helm:
       values: |
         server:
+          extraArgs:
+            - --insecure
           ingress:
             enabled: true
-            https: true
+            https: false
             hosts:
             - "argocd.{{ .Values.domain }}"
-            tls:
-              hosts:
-              - "argocd.{{ .Values.domain }}"
   syncPolicy:
     automated:
       prune: true
