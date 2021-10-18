@@ -19,6 +19,7 @@ spec:
         server:
           ingress:
             enabled: true
+            https: true
             hosts:
             - "argocd.{{ .Values.domain }}"
   syncPolicy:
