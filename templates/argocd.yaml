@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  project: default
+  source:
+    path: charts/argo-cd
+    repoURL: https://github.com/toleksa/kube-argo.git
+    targetRevision: HEAD
+    helm:
+      values: |
+        server:
+          ingress:
+            enabled: true
+            hosts:
+            - "argocd.{{ .Values.domain }}"
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - PruneLast=true
