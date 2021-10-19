@@ -7,6 +7,7 @@ fi
 
 . ./env
 
+helm repo add argo-cd https://argoproj.github.io/argo-helm
 #CMD="helm install --create-namespace --namespace argocd --set server.ingres.enabled=true --set server.ingress.hosts=argocd.$KUBERNETES_DOMAIN argocd argo-cd/argo-cd"
 CMD="helm install --create-namespace --namespace argocd argocd argo-cd/argo-cd"
 echo $CMD
