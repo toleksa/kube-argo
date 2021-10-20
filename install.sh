@@ -31,6 +31,9 @@ kubectl delete secret -l owner=helm,name=argocd -n argocd
 # cli
 curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
 chmod +x /usr/local/bin/argocd
+
+sleep 10s
+
 IP=$(kubectl -n argocd get svc | grep "argocd-server " | gawk '{ print $3 }')
 CMD="argocd login ${IP}:443 --username admin --password password --insecure"
 eval $CMD
