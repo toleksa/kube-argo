@@ -20,6 +20,13 @@ spec:
             host: $EXTERNAL_DNS_RFC2136_HOST
             zone: $EXTERNAL_DNS_RFC2136_ZONE
             tsigSecret: $EXTERNAL_DNS_RFC2136_TSIGSECRET 
+        metallb:
+          pools:
+          - name: default
+            protocol: layer2
+            addresses: 
+            - $METALLB_ADDRESSES
+            avoid-buggy-ips: true
   syncPolicy:
     automated:
       prune: true

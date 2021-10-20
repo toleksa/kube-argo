@@ -20,6 +20,7 @@ kubectl -n argocd patch secret argocd-secret \
     "admin.passwordMtime": "'$(date +%FT%T%Z)'"
   }}'
 
+METALLB_ADDRESSES=${METALLB_ADDRESSES:=`hostname -I | awk '{print $1}'`} \
 envsubst < kube-argo.yaml | kubectl apply -f -
 
 # remove argocd entry from helm, now it's selfmanaged

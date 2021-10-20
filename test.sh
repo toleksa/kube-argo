@@ -1,4 +1,4 @@
 #!/bin/bash
 
-. ./env ; envsubst < kube-argo.yaml
+. ./env ; METALLB_ADDRESSES=${METALLB_ADDRESSES:=`hostname -I | awk '{print $1}'`} envsubst < kube-argo.yaml
 
