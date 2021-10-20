@@ -38,4 +38,4 @@ CMD="argocd login ${IP}:443 --username admin --password password --insecure"
 echo
 echo "to login to argocd cli use this command:"
 echo $CMD
-echo "ssh-keyscan github.com"
+echo "argocd app sync kube-argo"
