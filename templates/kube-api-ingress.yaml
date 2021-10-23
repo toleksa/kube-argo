@@ -5,9 +5,10 @@ metadata:
   namespace: default
   annotations:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
 spec:
   rules:
-  - host: kube-api.{{ .Values.domain }}
+  - host: "kube-api.{{ .Values.domain }}"
     http:
       paths:
       - pathType: ImplementationSpecific
@@ -16,3 +17,7 @@ spec:
             name: kubernetes
             port:
               number: 443
+  tls:
+  - hosts:
+    - "kube-api.{{ .Values.domain }}"
+    secretName: kube-api-cert
