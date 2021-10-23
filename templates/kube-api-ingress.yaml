@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: kube-api
   namespace: default
-  lables:
+  labels:
     app: kubernetes
   annotations:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
