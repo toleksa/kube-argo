@@ -22,20 +22,31 @@ kubectl -n argocd patch secret argocd-secret \
     "admin.passwordMtime": "'$(date +%FT%T%Z)'"
   }}'
 
-METALLB_ADDRESSES=${METALLB_ADDRESSES:=`hostname -I | awk '{print $1"-"$1}'`} \
-envsubst < kube-argo.yaml | kubectl apply -f -
+# generate kube-api-cert
+CMD="openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /tmp/$KUBERNETES_DOMAIN.key -out /tmp/$KUBERNETES_DOMAIN.crt -subj \"/CN=kube-api.${KUBERNETES_DOMAIN}/O=${KUBERNETES_DOMAIN}\""
+echo $CMD
+eval $CMD
+
+CMD="kubectl create secret tls kube-api-cert --key /tmp/$KUBERNETES_DOMAIN.key --cert /tmp/$KUBERNETES_DOMAIN.crt -n default"
+echo $CMD
+eval $CMD
+
+# install kube-argo app
+. ./env ; METALLB_ADDRESSES=${METALLB_ADDRESSES:=`hostname -I | awk '{print $1"-"$1}'`} envsubst < kube-argo.yaml | kubectl apply -f -
 
 # remove argocd entry from helm, now it's selfmanaged
 kubectl delete secret -l owner=helm,name=argocd -n argocd
 
-# cli
+# argo cli
 curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
 chmod +x /usr/local/bin/argocd
 
+# argo cli login and credentials
 IP=$(kubectl -n argocd get svc | grep "argocd-server " | gawk '{ print $3 }')
 CMD="argocd login ${IP}:443 --username admin --password password --insecure"
-#eval $CMD
+#eval $CMD      #this fails, needs to wait till argo is up
 echo
 echo "to login to argocd cli use this command:"
 echo $CMD
 echo "argocd app sync kube-argo"
+
