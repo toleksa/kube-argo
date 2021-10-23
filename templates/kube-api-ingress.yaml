@@ -16,8 +16,7 @@ spec:
           service:
             name: kubernetes
             port:
-              number: 80
-#              number: 443
+              number: 443
 #  tls:
 #  - hosts:
 #    - "kube-api.{{ .Values.domain }}"
