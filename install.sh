@@ -9,6 +9,15 @@ fi
 
 . ./env
 
+echo "Waiting for kubernetes to start"
+until kubectl get nodes | grep `hostname` | grep " Ready " ; do
+  sleep 5s
+  echo -n .
+done
+echo ""
+kubectl get nodes
+echo ""
+
 helm repo add argo-cd https://argoproj.github.io/argo-helm
 #CMD="helm install --create-namespace --namespace argocd --set server.ingres.enabled=true --set server.ingress.hosts=argocd.$KUBERNETES_DOMAIN argocd argo-cd/argo-cd"
 CMD="helm install --create-namespace --namespace argocd argocd argo-cd/argo-cd"
