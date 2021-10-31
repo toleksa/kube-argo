@@ -13,7 +13,7 @@ fi
 
 #dns update
 HOST="${KUBERNETES_DOMAIN}."
-IP=`hostname -I`
+IP=`hostname -I | cut -d' ' -f1`
 TTL="60"
 RECORD=" $HOST $TTL A $IP"
 echo "
