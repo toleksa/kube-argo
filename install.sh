@@ -12,7 +12,7 @@ fi
 . ./env
 
 #dns update
-HOST="`hostname`.${KUBERNETES_DOMAIN}."
+HOST="${KUBERNETES_DOMAIN}."
 IP=`hostname -I`
 TTL="60"
 RECORD=" $HOST $TTL A $IP"
