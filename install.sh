@@ -47,11 +47,11 @@ kubectl -n argocd patch secret argocd-secret \
   }}'
 
 # generate kube-api-cert
-CMD="openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /tmp/$KUBERNETES_DOMAIN.key -out /tmp/$KUBERNETES_DOMAIN.crt -subj \"/CN=kube-api.${KUBERNETES_DOMAIN}/O=${KUBERNETES_DOMAIN}\""
+CMD="openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /$KUBERNETES_DOMAIN.key -out /$KUBERNETES_DOMAIN.crt -subj \"/CN=kube-api.${KUBERNETES_DOMAIN}/O=${KUBERNETES_DOMAIN}\" -addext \"subjectAltName = DNS:kube-api.${KUBERNETES_DOMAIN}\""
 echo $CMD
 eval $CMD
 
-CMD="kubectl create secret tls kube-api-cert --key /tmp/$KUBERNETES_DOMAIN.key --cert /tmp/$KUBERNETES_DOMAIN.crt -n default"
+CMD="kubectl create secret tls kube-api-cert --key /$KUBERNETES_DOMAIN.key --cert /$KUBERNETES_DOMAIN.crt -n default"
 echo $CMD
 eval $CMD
 
