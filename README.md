@@ -1,4 +1,4 @@
 # kube-argo 
 
-TODO:
-sign kube-api cert using rke2.yaml CA
+TODO/branches:
+kube-api-ingress - sign kube-api cert using rke2.yaml CA
