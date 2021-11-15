@@ -10,7 +10,7 @@ spec:
   project: default
   source:
     repoURL: 'https://github.com/toleksa/kube-argo'
-    targetRevision: HEAD
+    targetRevision: kube-api-ingress
     path: .
     helm:
       values: |
