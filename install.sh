@@ -46,15 +46,6 @@ kubectl -n argocd patch secret argocd-secret \
     "admin.passwordMtime": "'$(date +%FT%T%Z)'"
   }}'
 
-# generate kube-api-cert
-CMD="openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /$KUBERNETES_DOMAIN.key -out /$KUBERNETES_DOMAIN.crt -subj \"/CN=kube-api.${KUBERNETES_DOMAIN}/O=${KUBERNETES_DOMAIN}\" -addext \"subjectAltName = DNS:kube-api.${KUBERNETES_DOMAIN}\""
-echo $CMD
-eval $CMD
-
-CMD="kubectl create secret tls kube-api-cert --key /$KUBERNETES_DOMAIN.key --cert /$KUBERNETES_DOMAIN.crt -n default"
-echo $CMD
-eval $CMD
-
 # install kube-argo app
 . ./env ; METALLB_ADDRESSES=${METALLB_ADDRESSES:=`hostname -I | awk '{print $1"-"$1}'`} envsubst < kube-argo.yaml | kubectl apply -f -
 
