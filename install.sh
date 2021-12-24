@@ -11,19 +11,6 @@ fi
 
 . ./env
 
-#dns update
-HOST="${KUBERNETES_DOMAIN}."
-IP=`hostname -I | cut -d' ' -f1`
-TTL="60"
-RECORD=" $HOST $TTL A $IP"
-echo "
-server $EXTERNAL_DNS_RFC2136_HOST
-zone $EXTERNAL_DNS_RFC2136_ZONE
-debug
-update add $RECORD
-show
-send" | nsupdate -y hmac-sha256:externaldns-key:${EXTERNAL_DNS_RFC2136_TSIGSECRET}
-
 echo "Waiting for kubernetes to start"
 until kubectl get nodes | grep `hostname` | grep " Ready " ; do
   sleep 5s
